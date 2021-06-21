@@ -10,9 +10,11 @@ public class SpringShopApplication {
         SpringApplication.run(SpringShopApplication.class, args);
     }
 
-    // Product
-    // User
-    // Role
-    // Cart
-    // Review
+    // USER - пользователь
+    // ROLE - Роль - Менеджер (Контролирование количества товаров, Просмотр покупателей),
+    // Покупатель(заказ товара), если успеем добавим Администратора
+    // PRODUCT - Товар(если успеем, то добавление файлов(например фото товара))
+    // REVIEWS - Отзывы
+    // Cart - корзина
+    // Двухфакторная авторизация
 }
