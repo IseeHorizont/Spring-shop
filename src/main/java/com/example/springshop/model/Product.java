@@ -8,20 +8,25 @@ import javax.persistence.*;
 import java.util.UUID;
 
 @Entity
-@Table(name = "products")
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 public class Product {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id")
     private UUID id;
 
-    @Column(name = "title")
-    private String title;
+    @Column(name = "name", nullable = false)
+    private String name;
 
-    @Column(name = "price")
-    private Integer price;
+    @Column(name = "count", nullable = false)
+    private Integer count;
+
+    public void incrementCount() {
+        this.count++;
+    }
+
+    public void decrementCount() {
+        this.count--;
+    }
 }

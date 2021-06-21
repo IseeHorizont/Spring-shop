@@ -1,9 +1,8 @@
 package com.example.springshop.frontend;
 
 import com.example.springshop.model.Product;
-import com.example.springshop.repository.ProductRepository;
 import com.example.springshop.service.CartService;
-import com.vaadin.flow.component.*;
+import com.vaadin.flow.component.UI;
 import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.grid.Grid;
 import com.vaadin.flow.component.notification.Notification;
@@ -14,46 +13,22 @@ import com.vaadin.flow.data.provider.ListDataProvider;
 import com.vaadin.flow.data.renderer.ComponentRenderer;
 import com.vaadin.flow.router.Route;
 
-
-@Route("main")
-public class MainView extends VerticalLayout {
+@Route("cart")
+public class CartView extends VerticalLayout {
     private final Grid<Product> grid = new Grid<>(Product.class);
 
-    private final ProductRepository productRepository;
     private final CartService cartService;
 
-    public MainView(ProductRepository productRepository, CartService cartService) {
-        this.productRepository = productRepository;
+    public CartView(CartService cartService) {
         this.cartService = cartService;
-
-        initPage();
+        initCartGrid();
+        add(grid);
     }
 
-    private void initPage() {
-        
-        initProductGrid();
-        grid.setColumns("name", "count");
-        add(grid, initCartButton());
-    }
+    private void initCartGrid() {
+        var products = cartService.getProducts();
 
-    private HorizontalLayout initCartButton() {
-
-        var addToCartButton = new Button("Add to cart", item -> {
-            cartService.addProduct(grid.getSelectedItems());
-            Notification.show("Product added in cart");
-        });
-
-        var toCartButton = new Button("Go to cart", item -> {
-            UI.getCurrent().navigate("cart");
-        });
-
-        return new HorizontalLayout(addToCartButton);
-    }
-
-    private void initProductGrid() {
-        var products = productRepository.findAll();
-
-        grid.setItems(productRepository.findAll());
+        grid.setItems(products);
         grid.setSizeUndefined();
         grid.setSelectionMode(Grid.SelectionMode.MULTI);
         ListDataProvider<Product> dataProvider = DataProvider.ofCollection(products);
@@ -61,14 +36,12 @@ public class MainView extends VerticalLayout {
 
         grid.addColumn(new ComponentRenderer<>(item -> {
             var plusButton = new Button("+", i -> {
-                item.incrementCount();
-                productRepository.save(item);
+                cartService.increaseProductCount(item);
                 grid.getDataProvider().refreshAll();
             });
 
             var minusButton = new Button("-", i -> {
-                item.decrementCount();
-                productRepository.save(item);
+                cartService.decreaseProductCount(item);
                 grid.getDataProvider().refreshAll();
             });
 
