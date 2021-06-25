@@ -67,7 +67,7 @@
                 <constraints nullable="false" foreignKeyName="fk_user_id" references="user(id)"/>
             </column>
             <column name="order_product" type="?????????">
-<!--                TODO -->
+                <constraints nullable="false" foreignKeyName="order_product" references="order_product"/>
             </column>
         </createTable>
     </changeSet>
