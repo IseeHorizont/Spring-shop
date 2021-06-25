@@ -1,15 +1,10 @@
 package com.example.springshop.model;
 
-import lombok.AllArgsConstructor;
-import lombok.NoArgsConstructor;
-
 import javax.persistence.*;
 import java.util.UUID;
 
 @Entity
-@Table(name = "users")
-@NoArgsConstructor
-@AllArgsConstructor
+@Table(name = "user", schema = "public")
 public class User {
 
     @Id
@@ -17,21 +12,44 @@ public class User {
     @Column(name = "id")
     private UUID id;
 
-    @Column(name = "name")
-    private String name;
-
-    @Column(name = "last_name")
-    private String lastName;
-
-    @Column(name = "second_name")
-    private String secondName;
-
-    @Column(name = "phone")
-    private String phone;
-
     @Column(name = "login")
     private String login;
 
     @Column(name = "password")
     private String password;
+
+    @Column(name = "role")
+    private String role;
+
+    public UUID getId() {
+        return id;
+    }
+
+    public void setId(UUID id) {
+        this.id = id;
+    }
+
+    public String getLogin() {
+        return login;
+    }
+
+    public void setLogin(String login) {
+        this.login = login;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public String getRole() {
+        return role;
+    }
+
+    public void setRole(String role) {
+        this.role = role;
+    }
 }

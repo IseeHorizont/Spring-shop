@@ -7,7 +7,7 @@ import javax.persistence.*;
 import java.util.UUID;
 
 @Entity
-@Table(name = "roles")
+@Table(name = "role")
 @AllArgsConstructor
 @NoArgsConstructor
 public class Role {
