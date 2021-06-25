@@ -9,12 +9,6 @@
             <column name="id" type="uuid">
                 <constraints primaryKey="true"/>
             </column>
-            <column name="name" type="varchar(36)"/>
-            <column name="last_name" type="varchar(36)"/>
-            <column name="second_name" type="varchar(36)"/>
-            <column name="phone" type="varchar(14)">
-                <constraints nullable="false" unique="true"/>
-            </column>
             <column name="login" type="varchar(36)">
                 <constraints nullable="false" unique="true"/>
             </column>
@@ -46,7 +40,7 @@
             </column>
         </createTable>
 
-        <createTable tableName="card">
+        <createTable tableName="cart">
             <column name="id" type="uuid">
                 <constraints primaryKey="true"/>
             </column>
