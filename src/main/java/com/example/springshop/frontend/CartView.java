@@ -22,7 +22,7 @@ public class CartView extends VerticalLayout {
     public CartView(CartService cartService) {
         this.cartService = cartService;
         initCartGrid();
-        add(grid);
+        add(grid, initGoToMainButton());
     }
 
     private void initCartGrid() {
@@ -47,5 +47,13 @@ public class CartView extends VerticalLayout {
 
             return new HorizontalLayout(plusButton, minusButton);
         }));
+    }
+
+    private HorizontalLayout initGoToMainButton() {
+
+        var goToMainButton = new Button("Go to main page", item -> {
+            UI.getCurrent().navigate("main");
+        });
+        return new HorizontalLayout(goToMainButton);
     }
 }

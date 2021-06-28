@@ -14,6 +14,7 @@ import java.util.UUID;
 public class Product {
 
     @Id
+    @Column(name = "product_id", nullable = false)
     private UUID id;
 
     @Column(name = "name", nullable = false)
