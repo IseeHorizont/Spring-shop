@@ -1,5 +1,8 @@
 package com.example.springshop.service;
 
+import com.example.springshop.aop.LogAddProduct;
+import com.example.springshop.aop.LogCreateCart;
+import com.example.springshop.aop.LogDeleteProduct;
 import com.example.springshop.model.Product;
 import org.springframework.stereotype.Service;
 
@@ -12,14 +15,17 @@ import java.util.stream.Collectors;
 public class CartService {
     private List<Product> productList;
 
+    @LogCreateCart
     public CartService() {
         this.productList = new ArrayList<>();
     }
 
+    @LogAddProduct
     public void addProduct(Product product) {
         productList.add(product);
     }
 
+    @LogAddProduct
     public void addProduct(Set<Product> products) {
         productList.addAll(products.stream().map(
                 product -> {
@@ -32,6 +38,7 @@ public class CartService {
         ).collect(Collectors.toList()));
     }
 
+    @LogDeleteProduct
     public void deleteProduct(Product product) {
         productList.removeIf(p -> p.getId().equals(product.getId()));
     }
